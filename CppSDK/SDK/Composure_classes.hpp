@@ -1,0 +1,1323 @@
+#pragma once
+
+ 
+
+// Package: Composure
+
+#include "Basic.hpp"
+
+#include "Composure_structs.hpp"
+#include "CoreUObject_structs.hpp"
+#include "CoreUObject_classes.hpp"
+#include "Engine_structs.hpp"
+#include "Engine_classes.hpp"
+#include "CameraCalibrationCore_structs.hpp"
+#include "MovieSceneTracks_classes.hpp"
+#include "OpenColorIO_structs.hpp"
+#include "MovieScene_structs.hpp"
+#include "MovieScene_classes.hpp"
+
+
+namespace SDK
+{
+
+// Class Composure.CompositingElementPass
+// 0x0038 (0x0060 - 0x0028)
+class UCompositingElementPass : public UObject
+{
+public:
+	bool                                          bEnabled;                                          // 0x0028(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	uint8                                         Pad_104F[0x3];                                     // 0x0029(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   PassName;                                          // 0x002C(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1050[0x2C];                                    // 0x0034(0x002C)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	void OnDisabled();
+	void OnEnabled();
+	void OnFrameBegin(bool bCameraCutThisFrame);
+	void OnFrameEnd();
+	bool ReleaseRenderTarget(class UTextureRenderTarget2D* AssignedTarget);
+	class UTextureRenderTarget2D* RequestNativelyFormattedTarget(float RenderScale);
+	class UTextureRenderTarget2D* RequestRenderTarget(const struct FIntPoint& Dimensions, ETextureRenderTargetFormat Format);
+	void Reset();
+	void SetPassEnabled(bool bSetEnabledTo);
+
+	bool IsPassEnabled() const;
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingElementPass">();
+	}
+	static class UCompositingElementPass* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingElementPass>();
+	}
+};
+static_assert(alignof(UCompositingElementPass) == 0x000008, "Wrong alignment on UCompositingElementPass");
+static_assert(sizeof(UCompositingElementPass) == 0x000060, "Wrong size on UCompositingElementPass");
+static_assert(offsetof(UCompositingElementPass, bEnabled) == 0x000028, "Member 'UCompositingElementPass::bEnabled' has a wrong offset!");
+static_assert(offsetof(UCompositingElementPass, PassName) == 0x00002C, "Member 'UCompositingElementPass::PassName' has a wrong offset!");
+
+// Class Composure.CompositingElementInput
+// 0x0008 (0x0068 - 0x0060)
+class UCompositingElementInput : public UCompositingElementPass
+{
+public:
+	bool                                          bIntermediate;                                     // 0x0060(0x0001)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, AdvancedDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1054[0x7];                                     // 0x0061(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	class UTexture* GenerateInput();
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingElementInput">();
+	}
+	static class UCompositingElementInput* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingElementInput>();
+	}
+};
+static_assert(alignof(UCompositingElementInput) == 0x000008, "Wrong alignment on UCompositingElementInput");
+static_assert(sizeof(UCompositingElementInput) == 0x000068, "Wrong size on UCompositingElementInput");
+static_assert(offsetof(UCompositingElementInput, bIntermediate) == 0x000060, "Member 'UCompositingElementInput::bIntermediate' has a wrong offset!");
+
+// Class Composure.CompEditorImagePreviewInterface
+// 0x0000 (0x0028 - 0x0028)
+class ICompEditorImagePreviewInterface : public IInterface
+{
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompEditorImagePreviewInterface">();
+	}
+	static class ICompEditorImagePreviewInterface* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<ICompEditorImagePreviewInterface>();
+	}
+};
+static_assert(alignof(ICompEditorImagePreviewInterface) == 0x000008, "Wrong alignment on ICompEditorImagePreviewInterface");
+static_assert(sizeof(ICompEditorImagePreviewInterface) == 0x000028, "Wrong size on ICompEditorImagePreviewInterface");
+
+// Class Composure.CompImageColorPickerInterface
+// 0x0000 (0x0028 - 0x0028)
+class ICompImageColorPickerInterface final : public ICompEditorImagePreviewInterface
+{
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompImageColorPickerInterface">();
+	}
+	static class ICompImageColorPickerInterface* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<ICompImageColorPickerInterface>();
+	}
+};
+static_assert(alignof(ICompImageColorPickerInterface) == 0x000008, "Wrong alignment on ICompImageColorPickerInterface");
+static_assert(sizeof(ICompImageColorPickerInterface) == 0x000028, "Wrong size on ICompImageColorPickerInterface");
+
+// Class Composure.ComposurePipelineBaseActor
+// 0x0018 (0x0240 - 0x0228)
+class AComposurePipelineBaseActor : public AActor
+{
+public:
+	bool                                          bAutoRun;                                          // 0x0228(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bAutoRunChildElementsAndSelf;                      // 0x0229(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	uint8                                         Pad_1055[0x16];                                    // 0x022A(0x0016)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	void EnqueueRendering(bool bCameraCutThisFrame);
+	void SetAutoRun(bool bNewAutoRunVal);
+	void SetAutoRunChildrenAndSelf(bool bAutoRunChildAndSelf);
+
+	bool AreChildrenAndSelfAutoRun() const;
+	bool IsActivelyRunning() const;
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposurePipelineBaseActor">();
+	}
+	static class AComposurePipelineBaseActor* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<AComposurePipelineBaseActor>();
+	}
+};
+static_assert(alignof(AComposurePipelineBaseActor) == 0x000008, "Wrong alignment on AComposurePipelineBaseActor");
+static_assert(sizeof(AComposurePipelineBaseActor) == 0x000240, "Wrong size on AComposurePipelineBaseActor");
+static_assert(offsetof(AComposurePipelineBaseActor, bAutoRun) == 0x000228, "Member 'AComposurePipelineBaseActor::bAutoRun' has a wrong offset!");
+static_assert(offsetof(AComposurePipelineBaseActor, bAutoRunChildElementsAndSelf) == 0x000229, "Member 'AComposurePipelineBaseActor::bAutoRunChildElementsAndSelf' has a wrong offset!");
+
+// Class Composure.CompositingElement
+// 0x02D8 (0x0518 - 0x0240)
+class ACompositingElement : public AComposurePipelineBaseActor
+{
+public:
+	uint8                                         Pad_1056[0x8];                                     // 0x0240(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	class UComposureCompositingTargetComponent*   CompositingTarget;                                 // 0x0248(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UComposurePostProcessingPassProxy*      PostProcessProxy;                                  // 0x0250(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class UCompositingElementInput*>       Inputs;                                            // 0x0258(0x0010)(Edit, BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, ContainsInstancedReference, Protected, NativeAccessSpecifierProtected)
+	TArray<class UCompositingElementTransform*>   TransformPasses;                                   // 0x0268(0x0010)(Edit, BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, ContainsInstancedReference, Protected, NativeAccessSpecifierProtected)
+	TArray<class UCompositingElementOutput*>      Outputs;                                           // 0x0278(0x0010)(Edit, BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, ContainsInstancedReference, Protected, NativeAccessSpecifierProtected)
+	ESceneCameraLinkType                          CameraSource;                                      // 0x0288(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TLazyObjectPtr<class ACameraActor>            TargetCameraActor;                                 // 0x028C(0x001C)(Edit, DisableEditOnTemplate, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EInheritedSourceType                          ResolutionSource;                                  // 0x02A8(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FIntPoint                              RenderResolution;                                  // 0x02AC(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	ETextureRenderTargetFormat                    RenderFormat;                                      // 0x02B4(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, AdvancedDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bUseSharedTargetPool;                              // 0x02B5(0x0001)(Edit, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, AdvancedDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1057[0x32];                                    // 0x02B6(0x0032)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         FreezeFrameMask;                                   // 0x02E8(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	uint8                                         Pad_1058[0x4];                                     // 0x02EC(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	FMulticastInlineDelegateProperty_             OnTransformPassRendered_BP;                        // 0x02F0(0x0010)(ZeroConstructor, InstancedReference, BlueprintAssignable, BlueprintCallable, NativeAccessSpecifierPublic)
+	FMulticastInlineDelegateProperty_             OnFinalPassRendered_BP;                            // 0x0300(0x0010)(ZeroConstructor, InstancedReference, BlueprintAssignable, BlueprintCallable, NativeAccessSpecifierPublic)
+	class FName                                   CompShotIdName;                                    // 0x0310(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class ACompositingElement*                    Parent;                                            // 0x0318(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	TArray<class ACompositingElement*>            ChildLayers;                                       // 0x0320(0x0010)(ZeroConstructor, NativeAccessSpecifierPrivate)
+	uint8                                         Pad_1059[0x4];                                     // 0x0330(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         OutputOpacity;                                     // 0x0334(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	TMap<class UCompositingElementInput*, ECompPassConstructionType> UserConstructedInputs;                             // 0x0338(0x0050)(NativeAccessSpecifierPrivate)
+	TMap<class UCompositingElementTransform*, ECompPassConstructionType> UserConstructedTransforms;                         // 0x0388(0x0050)(NativeAccessSpecifierPrivate)
+	TMap<class UCompositingElementOutput*, ECompPassConstructionType> UserConstructedOutputs;                            // 0x03D8(0x0050)(NativeAccessSpecifierPrivate)
+	TArray<class UCompositingElementInput*>       InternalInputs;                                    // 0x0428(0x0010)(ExportObject, ZeroConstructor, Transient, DuplicateTransient, ContainsInstancedReference, NativeAccessSpecifierPrivate)
+	TArray<class UCompositingElementTransform*>   InternalTransformPasses;                           // 0x0438(0x0010)(ExportObject, ZeroConstructor, Transient, DuplicateTransient, ContainsInstancedReference, NativeAccessSpecifierPrivate)
+	TArray<class UCompositingElementOutput*>      InternalOutputs;                                   // 0x0448(0x0010)(ExportObject, ZeroConstructor, Transient, DuplicateTransient, ContainsInstancedReference, NativeAccessSpecifierPrivate)
+	class UAlphaTransformPass*                    InternalAlphaPass;                                 // 0x0458(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	uint8                                         Pad_105A[0xB8];                                    // 0x0460(0x00B8)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	class UCompositingElementInput* AddNewInputPass(class FName PassName, TSubclassOf<class UCompositingElementInput> InputType);
+	class UCompositingElementOutput* AddNewOutputPass(class FName PassName, TSubclassOf<class UCompositingElementOutput> OutputType);
+	class UCompositingElementTransform* AddNewTransformPass(class FName PassName, TSubclassOf<class UCompositingElementTransform> TransformType);
+	class UCompositingElementInput* CreateNewInputPass(class FName PassName, TSubclassOf<class UCompositingElementInput> InputType);
+	class UCompositingElementOutput* CreateNewOutputPass(class FName PassName, TSubclassOf<class UCompositingElementOutput> OutputType);
+	class UCompositingElementTransform* CreateNewTransformPass(class FName PassName, TSubclassOf<class UCompositingElementTransform> TransformType);
+	bool DeletePass(class UCompositingElementPass* PassToDelete);
+	class UCompositingElementInput* FindInputPass(TSubclassOf<class UCompositingElementInput> InputType, class UTexture** PassResult, class FName OptionalPassName);
+	class UTexture* FindNamedRenderResult(class FName PassName, bool bSearchSubElements);
+	class UCompositingElementOutput* FindOutputPass(TSubclassOf<class UCompositingElementOutput> OutputType, class FName OptionalPassName);
+	class UCompositingElementTransform* FindTransformPass(TSubclassOf<class UCompositingElementTransform> TransformType, class UTexture** PassResult, class FName OptionalPassName);
+	void RegisterPassResult(class FName ReferenceName, class UTexture* PassResult, bool bSetAsLatestRenderResult);
+	bool ReleaseOwnedTarget(class UTextureRenderTarget2D* OwnedTarget);
+	class UTexture* RenderCompElement(bool bCameraCutThisFrame);
+	class UTexture* RenderCompositingMaterial(struct FCompositingMaterial& CompMaterial, float RenderScale, class FName ResultLookupName, ETargetUsageFlags UsageTag);
+	class UTextureRenderTarget2D* RenderCompositingMaterialToTarget(struct FCompositingMaterial& CompMaterial, class UTextureRenderTarget2D* RenderTarget, class FName ResultLookupName);
+	class UTextureRenderTarget2D* RequestNamedRenderTarget(const class FName ReferenceName, const float RenderPercentage, ETargetUsageFlags UsageTag);
+	void SetEditorColorPickerDisplayImage(class UTexture* PickerDisplayImage);
+	void SetEditorColorPickingTarget(class UTextureRenderTarget2D* PickingTarget);
+	void SetElementName(const class FName NewName);
+	void SetOpacity(const float NewOpacity);
+	void SetRenderResolution(const struct FIntPoint& NewResolution);
+	void SetTargetCamera(class ACameraActor* NewCameraActor);
+
+	class ACameraActor* FindTargetCamera() const;
+	const TArray<class ACompositingElement*> GetChildElements() const;
+	class FName GetCompElementName() const;
+	class ACompositingElement* GetElementParent() const;
+	TArray<class UCompositingElementInput*> GetInputsList() const;
+	class UTexture* GetLatestRenderResult() const;
+	float GetOpacity() const;
+	TArray<class UCompositingElementOutput*> GetOutputsList() const;
+	int32 GetRenderPriority() const;
+	struct FIntPoint GetRenderResolution() const;
+	TArray<class UCompositingElementTransform*> GetTransformsList() const;
+	bool IsSubElement() const;
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingElement">();
+	}
+	static class ACompositingElement* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<ACompositingElement>();
+	}
+};
+static_assert(alignof(ACompositingElement) == 0x000008, "Wrong alignment on ACompositingElement");
+static_assert(sizeof(ACompositingElement) == 0x000518, "Wrong size on ACompositingElement");
+static_assert(offsetof(ACompositingElement, CompositingTarget) == 0x000248, "Member 'ACompositingElement::CompositingTarget' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, PostProcessProxy) == 0x000250, "Member 'ACompositingElement::PostProcessProxy' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, Inputs) == 0x000258, "Member 'ACompositingElement::Inputs' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, TransformPasses) == 0x000268, "Member 'ACompositingElement::TransformPasses' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, Outputs) == 0x000278, "Member 'ACompositingElement::Outputs' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, CameraSource) == 0x000288, "Member 'ACompositingElement::CameraSource' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, TargetCameraActor) == 0x00028C, "Member 'ACompositingElement::TargetCameraActor' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, ResolutionSource) == 0x0002A8, "Member 'ACompositingElement::ResolutionSource' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, RenderResolution) == 0x0002AC, "Member 'ACompositingElement::RenderResolution' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, RenderFormat) == 0x0002B4, "Member 'ACompositingElement::RenderFormat' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, bUseSharedTargetPool) == 0x0002B5, "Member 'ACompositingElement::bUseSharedTargetPool' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, FreezeFrameMask) == 0x0002E8, "Member 'ACompositingElement::FreezeFrameMask' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, OnTransformPassRendered_BP) == 0x0002F0, "Member 'ACompositingElement::OnTransformPassRendered_BP' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, OnFinalPassRendered_BP) == 0x000300, "Member 'ACompositingElement::OnFinalPassRendered_BP' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, CompShotIdName) == 0x000310, "Member 'ACompositingElement::CompShotIdName' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, Parent) == 0x000318, "Member 'ACompositingElement::Parent' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, ChildLayers) == 0x000320, "Member 'ACompositingElement::ChildLayers' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, OutputOpacity) == 0x000334, "Member 'ACompositingElement::OutputOpacity' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, UserConstructedInputs) == 0x000338, "Member 'ACompositingElement::UserConstructedInputs' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, UserConstructedTransforms) == 0x000388, "Member 'ACompositingElement::UserConstructedTransforms' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, UserConstructedOutputs) == 0x0003D8, "Member 'ACompositingElement::UserConstructedOutputs' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, InternalInputs) == 0x000428, "Member 'ACompositingElement::InternalInputs' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, InternalTransformPasses) == 0x000438, "Member 'ACompositingElement::InternalTransformPasses' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, InternalOutputs) == 0x000448, "Member 'ACompositingElement::InternalOutputs' has a wrong offset!");
+static_assert(offsetof(ACompositingElement, InternalAlphaPass) == 0x000458, "Member 'ACompositingElement::InternalAlphaPass' has a wrong offset!");
+
+// Class Composure.CompositingCaptureBase
+// 0x0048 (0x0560 - 0x0518)
+class ACompositingCaptureBase final : public ACompositingElement
+{
+public:
+	class USceneCaptureComponent2D*               SceneCaptureComponent2D;                           // 0x0518(0x0008)(Edit, BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, EditConst, InstancedReference, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bApplyDistortion;                                  // 0x0520(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	uint8                                         Pad_1062[0x7];                                     // 0x0521(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FDistortionHandlerPicker               DistortionSource;                                  // 0x0528(0x0028)(Edit, BlueprintVisible, ContainsInstancedReference, Protected, NativeAccessSpecifierProtected)
+	float                                         OverscanFactor;                                    // 0x0550(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	float                                         OriginalFocalLength;                               // 0x0554(0x0004)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	class UMaterialInstanceDynamic*               LastDistortionMID;                                 // 0x0558(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+
+public:
+	void UpdateDistortion();
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingCaptureBase">();
+	}
+	static class ACompositingCaptureBase* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<ACompositingCaptureBase>();
+	}
+};
+static_assert(alignof(ACompositingCaptureBase) == 0x000008, "Wrong alignment on ACompositingCaptureBase");
+static_assert(sizeof(ACompositingCaptureBase) == 0x000560, "Wrong size on ACompositingCaptureBase");
+static_assert(offsetof(ACompositingCaptureBase, SceneCaptureComponent2D) == 0x000518, "Member 'ACompositingCaptureBase::SceneCaptureComponent2D' has a wrong offset!");
+static_assert(offsetof(ACompositingCaptureBase, bApplyDistortion) == 0x000520, "Member 'ACompositingCaptureBase::bApplyDistortion' has a wrong offset!");
+static_assert(offsetof(ACompositingCaptureBase, DistortionSource) == 0x000528, "Member 'ACompositingCaptureBase::DistortionSource' has a wrong offset!");
+static_assert(offsetof(ACompositingCaptureBase, OverscanFactor) == 0x000550, "Member 'ACompositingCaptureBase::OverscanFactor' has a wrong offset!");
+static_assert(offsetof(ACompositingCaptureBase, OriginalFocalLength) == 0x000554, "Member 'ACompositingCaptureBase::OriginalFocalLength' has a wrong offset!");
+static_assert(offsetof(ACompositingCaptureBase, LastDistortionMID) == 0x000558, "Member 'ACompositingCaptureBase::LastDistortionMID' has a wrong offset!");
+
+// Class Composure.CompositingPickerAsyncTask
+// 0x0050 (0x0080 - 0x0030)
+class UCompositingPickerAsyncTask final : public UBlueprintAsyncActionBase
+{
+public:
+	uint8                                         Pad_1063[0x8];                                     // 0x0030(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	FMulticastInlineDelegateProperty_             OnPick;                                            // 0x0038(0x0010)(ZeroConstructor, InstancedReference, BlueprintAssignable, NativeAccessSpecifierPublic)
+	FMulticastInlineDelegateProperty_             OnCancel;                                          // 0x0048(0x0010)(ZeroConstructor, InstancedReference, BlueprintAssignable, NativeAccessSpecifierPublic)
+	FMulticastInlineDelegateProperty_             OnAccept;                                          // 0x0058(0x0010)(ZeroConstructor, InstancedReference, BlueprintAssignable, NativeAccessSpecifierPublic)
+	class UTextureRenderTarget2D*                 PickerTarget;                                      // 0x0068(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class UTexture*                               PickerDisplayImage;                                // 0x0070(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	uint8                                         Pad_1064[0x8];                                     // 0x0078(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UCompositingPickerAsyncTask* OpenCompositingPicker(class UTextureRenderTarget2D* Param_PickerTarget, class UTexture* DisplayImage, const class FText& WindowTitle, const bool bAverageColorOnDrag, const bool bUseImplicitGamma);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingPickerAsyncTask">();
+	}
+	static class UCompositingPickerAsyncTask* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingPickerAsyncTask>();
+	}
+};
+static_assert(alignof(UCompositingPickerAsyncTask) == 0x000008, "Wrong alignment on UCompositingPickerAsyncTask");
+static_assert(sizeof(UCompositingPickerAsyncTask) == 0x000080, "Wrong size on UCompositingPickerAsyncTask");
+static_assert(offsetof(UCompositingPickerAsyncTask, OnPick) == 0x000038, "Member 'UCompositingPickerAsyncTask::OnPick' has a wrong offset!");
+static_assert(offsetof(UCompositingPickerAsyncTask, OnCancel) == 0x000048, "Member 'UCompositingPickerAsyncTask::OnCancel' has a wrong offset!");
+static_assert(offsetof(UCompositingPickerAsyncTask, OnAccept) == 0x000058, "Member 'UCompositingPickerAsyncTask::OnAccept' has a wrong offset!");
+static_assert(offsetof(UCompositingPickerAsyncTask, PickerTarget) == 0x000068, "Member 'UCompositingPickerAsyncTask::PickerTarget' has a wrong offset!");
+static_assert(offsetof(UCompositingPickerAsyncTask, PickerDisplayImage) == 0x000070, "Member 'UCompositingPickerAsyncTask::PickerDisplayImage' has a wrong offset!");
+
+// Class Composure.CompositingMediaInput
+// 0x0170 (0x01D8 - 0x0068)
+class UCompositingMediaInput : public UCompositingElementInput
+{
+public:
+	struct FCompositingMaterial                   MediaTransformMaterial;                            // 0x0068(0x0158)(Edit, BlueprintVisible, BlueprintReadOnly, NativeAccessSpecifierPublic)
+	class UMaterialInterface*                     DefaultMaterial;                                   // 0x01C0(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class UMaterialInterface*                     DefaultTestPlateMaterial;                          // 0x01C8(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class UMaterialInstanceDynamic*               FallbackMID;                                       // 0x01D0(0x0008)(ZeroConstructor, Transient, DuplicateTransient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingMediaInput">();
+	}
+	static class UCompositingMediaInput* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingMediaInput>();
+	}
+};
+static_assert(alignof(UCompositingMediaInput) == 0x000008, "Wrong alignment on UCompositingMediaInput");
+static_assert(sizeof(UCompositingMediaInput) == 0x0001D8, "Wrong size on UCompositingMediaInput");
+static_assert(offsetof(UCompositingMediaInput, MediaTransformMaterial) == 0x000068, "Member 'UCompositingMediaInput::MediaTransformMaterial' has a wrong offset!");
+static_assert(offsetof(UCompositingMediaInput, DefaultMaterial) == 0x0001C0, "Member 'UCompositingMediaInput::DefaultMaterial' has a wrong offset!");
+static_assert(offsetof(UCompositingMediaInput, DefaultTestPlateMaterial) == 0x0001C8, "Member 'UCompositingMediaInput::DefaultTestPlateMaterial' has a wrong offset!");
+static_assert(offsetof(UCompositingMediaInput, FallbackMID) == 0x0001D0, "Member 'UCompositingMediaInput::FallbackMID' has a wrong offset!");
+
+// Class Composure.MediaTextureCompositingInput
+// 0x0008 (0x01E0 - 0x01D8)
+class UMediaTextureCompositingInput final : public UCompositingMediaInput
+{
+public:
+	class UMediaTexture*                          MediaSource;                                       // 0x01D8(0x0008)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"MediaTextureCompositingInput">();
+	}
+	static class UMediaTextureCompositingInput* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UMediaTextureCompositingInput>();
+	}
+};
+static_assert(alignof(UMediaTextureCompositingInput) == 0x000008, "Wrong alignment on UMediaTextureCompositingInput");
+static_assert(sizeof(UMediaTextureCompositingInput) == 0x0001E0, "Wrong size on UMediaTextureCompositingInput");
+static_assert(offsetof(UMediaTextureCompositingInput, MediaSource) == 0x0001D8, "Member 'UMediaTextureCompositingInput::MediaSource' has a wrong offset!");
+
+// Class Composure.CompositingInputInterface
+// 0x0000 (0x0028 - 0x0028)
+class ICompositingInputInterface final : public IInterface
+{
+public:
+	class UTexture* GenerateInput(class UCompositingInputInterfaceProxy* Proxy);
+	void OnFrameBegin(class UCompositingInputInterfaceProxy* Proxy, bool bCameraCutThisFrame);
+	void OnFrameEnd(class UCompositingInputInterfaceProxy* Proxy);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingInputInterface">();
+	}
+	static class ICompositingInputInterface* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<ICompositingInputInterface>();
+	}
+};
+static_assert(alignof(ICompositingInputInterface) == 0x000008, "Wrong alignment on ICompositingInputInterface");
+static_assert(sizeof(ICompositingInputInterface) == 0x000028, "Wrong size on ICompositingInputInterface");
+
+// Class Composure.CompositingInputInterfaceProxy
+// 0x0010 (0x0078 - 0x0068)
+class UCompositingInputInterfaceProxy final : public UCompositingElementInput
+{
+public:
+	TScriptInterface<class ICompositingInputInterface> CompositingInput;                                  // 0x0068(0x0010)(BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, UObjectWrapper, NativeAccessSpecifierPublic)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingInputInterfaceProxy">();
+	}
+	static class UCompositingInputInterfaceProxy* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingInputInterfaceProxy>();
+	}
+};
+static_assert(alignof(UCompositingInputInterfaceProxy) == 0x000008, "Wrong alignment on UCompositingInputInterfaceProxy");
+static_assert(sizeof(UCompositingInputInterfaceProxy) == 0x000078, "Wrong size on UCompositingInputInterfaceProxy");
+static_assert(offsetof(UCompositingInputInterfaceProxy, CompositingInput) == 0x000068, "Member 'UCompositingInputInterfaceProxy::CompositingInput' has a wrong offset!");
+
+// Class Composure.CompositingElementOutput
+// 0x0000 (0x0060 - 0x0060)
+class UCompositingElementOutput : public UCompositingElementPass
+{
+public:
+	void RelayOutput(class UTexture* FinalResult, class UComposurePostProcessingPassProxy* PostProcessProxy);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingElementOutput">();
+	}
+	static class UCompositingElementOutput* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingElementOutput>();
+	}
+};
+static_assert(alignof(UCompositingElementOutput) == 0x000008, "Wrong alignment on UCompositingElementOutput");
+static_assert(sizeof(UCompositingElementOutput) == 0x000060, "Wrong size on UCompositingElementOutput");
+
+// Class Composure.ColorConverterOutputPass
+// 0x0018 (0x0078 - 0x0060)
+class UColorConverterOutputPass : public UCompositingElementOutput
+{
+public:
+	uint8                                         Pad_1067[0x8];                                     // 0x0060(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	class UCompositingElementTransform*           ColorConverter;                                    // 0x0068(0x0008)(Edit, ExportObject, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, PersistentInstance, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TSubclassOf<class UCompositingElementTransform> DefaultConverterClass;                             // 0x0070(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, Protected, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ColorConverterOutputPass">();
+	}
+	static class UColorConverterOutputPass* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UColorConverterOutputPass>();
+	}
+};
+static_assert(alignof(UColorConverterOutputPass) == 0x000008, "Wrong alignment on UColorConverterOutputPass");
+static_assert(sizeof(UColorConverterOutputPass) == 0x000078, "Wrong size on UColorConverterOutputPass");
+static_assert(offsetof(UColorConverterOutputPass, ColorConverter) == 0x000068, "Member 'UColorConverterOutputPass::ColorConverter' has a wrong offset!");
+static_assert(offsetof(UColorConverterOutputPass, DefaultConverterClass) == 0x000070, "Member 'UColorConverterOutputPass::DefaultConverterClass' has a wrong offset!");
+
+// Class Composure.ComposurePostProcessPassPolicy
+// 0x0000 (0x0028 - 0x0028)
+class UComposurePostProcessPassPolicy : public UObject
+{
+public:
+	void SetupPostProcess(class USceneCaptureComponent2D* SceneCapture, class UMaterialInterface** TonemapperOverride);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposurePostProcessPassPolicy">();
+	}
+	static class UComposurePostProcessPassPolicy* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposurePostProcessPassPolicy>();
+	}
+};
+static_assert(alignof(UComposurePostProcessPassPolicy) == 0x000008, "Wrong alignment on UComposurePostProcessPassPolicy");
+static_assert(sizeof(UComposurePostProcessPassPolicy) == 0x000028, "Wrong size on UComposurePostProcessPassPolicy");
+
+// Class Composure.CompositingMediaCaptureOutput
+// 0x0010 (0x0088 - 0x0078)
+class UCompositingMediaCaptureOutput final : public UColorConverterOutputPass
+{
+public:
+	class UMediaOutput*                           CaptureOutput;                                     // 0x0078(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UMediaCapture*                          ActiveCapture;                                     // 0x0080(0x0008)(ZeroConstructor, Transient, DuplicateTransient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingMediaCaptureOutput">();
+	}
+	static class UCompositingMediaCaptureOutput* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingMediaCaptureOutput>();
+	}
+};
+static_assert(alignof(UCompositingMediaCaptureOutput) == 0x000008, "Wrong alignment on UCompositingMediaCaptureOutput");
+static_assert(sizeof(UCompositingMediaCaptureOutput) == 0x000088, "Wrong size on UCompositingMediaCaptureOutput");
+static_assert(offsetof(UCompositingMediaCaptureOutput, CaptureOutput) == 0x000078, "Member 'UCompositingMediaCaptureOutput::CaptureOutput' has a wrong offset!");
+static_assert(offsetof(UCompositingMediaCaptureOutput, ActiveCapture) == 0x000080, "Member 'UCompositingMediaCaptureOutput::ActiveCapture' has a wrong offset!");
+
+// Class Composure.RenderTargetCompositingOutput
+// 0x0008 (0x0068 - 0x0060)
+class URenderTargetCompositingOutput final : public UCompositingElementOutput
+{
+public:
+	class UTextureRenderTarget2D*                 RenderTarget;                                      // 0x0060(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"RenderTargetCompositingOutput">();
+	}
+	static class URenderTargetCompositingOutput* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<URenderTargetCompositingOutput>();
+	}
+};
+static_assert(alignof(URenderTargetCompositingOutput) == 0x000008, "Wrong alignment on URenderTargetCompositingOutput");
+static_assert(sizeof(URenderTargetCompositingOutput) == 0x000068, "Wrong size on URenderTargetCompositingOutput");
+static_assert(offsetof(URenderTargetCompositingOutput, RenderTarget) == 0x000060, "Member 'URenderTargetCompositingOutput::RenderTarget' has a wrong offset!");
+
+// Class Composure.CompositingElementTransform
+// 0x0010 (0x0070 - 0x0060)
+class UCompositingElementTransform : public UCompositingElementPass
+{
+public:
+	bool                                          bIntermediate;                                     // 0x0060(0x0001)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, AdvancedDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1068[0xF];                                     // 0x0061(0x000F)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	class UTexture* ApplyTransform(class UTexture* Input, class UComposurePostProcessingPassProxy* PostProcessProxy, class ACameraActor* TargetCamera);
+	class UTexture* FindNamedPrePassResult(class FName PassLookupName);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingElementTransform">();
+	}
+	static class UCompositingElementTransform* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingElementTransform>();
+	}
+};
+static_assert(alignof(UCompositingElementTransform) == 0x000008, "Wrong alignment on UCompositingElementTransform");
+static_assert(sizeof(UCompositingElementTransform) == 0x000070, "Wrong size on UCompositingElementTransform");
+static_assert(offsetof(UCompositingElementTransform, bIntermediate) == 0x000060, "Member 'UCompositingElementTransform::bIntermediate' has a wrong offset!");
+
+// Class Composure.AlphaTransformPass
+// 0x0018 (0x0088 - 0x0070)
+class UAlphaTransformPass final : public UCompositingElementTransform
+{
+public:
+	float                                         AlphaScale;                                        // 0x0070(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1069[0x4];                                     // 0x0074(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class UMaterialInterface*                     DefaultMaterial;                                   // 0x0078(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class UMaterialInstanceDynamic*               AlphaTransformMID;                                 // 0x0080(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"AlphaTransformPass">();
+	}
+	static class UAlphaTransformPass* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UAlphaTransformPass>();
+	}
+};
+static_assert(alignof(UAlphaTransformPass) == 0x000008, "Wrong alignment on UAlphaTransformPass");
+static_assert(sizeof(UAlphaTransformPass) == 0x000088, "Wrong size on UAlphaTransformPass");
+static_assert(offsetof(UAlphaTransformPass, AlphaScale) == 0x000070, "Member 'UAlphaTransformPass::AlphaScale' has a wrong offset!");
+static_assert(offsetof(UAlphaTransformPass, DefaultMaterial) == 0x000078, "Member 'UAlphaTransformPass::DefaultMaterial' has a wrong offset!");
+static_assert(offsetof(UAlphaTransformPass, AlphaTransformMID) == 0x000080, "Member 'UAlphaTransformPass::AlphaTransformMID' has a wrong offset!");
+
+// Class Composure.EXRFileCompositingOutput
+// 0x0038 (0x0098 - 0x0060)
+class UEXRFileCompositingOutput final : public UCompositingElementOutput
+{
+public:
+	struct FDirectoryPath                         OutputDirectiory;                                  // 0x0060(0x0010)(Edit, BlueprintVisible, NativeAccessSpecifierPublic)
+	class FString                                 FilenameFormat;                                    // 0x0070(0x0010)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FFrameRate                             OutputFrameRate;                                   // 0x0080(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EExrCompressionOptions                        Compression;                                       // 0x0088(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_106A[0xF];                                     // 0x0089(0x000F)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"EXRFileCompositingOutput">();
+	}
+	static class UEXRFileCompositingOutput* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UEXRFileCompositingOutput>();
+	}
+};
+static_assert(alignof(UEXRFileCompositingOutput) == 0x000008, "Wrong alignment on UEXRFileCompositingOutput");
+static_assert(sizeof(UEXRFileCompositingOutput) == 0x000098, "Wrong size on UEXRFileCompositingOutput");
+static_assert(offsetof(UEXRFileCompositingOutput, OutputDirectiory) == 0x000060, "Member 'UEXRFileCompositingOutput::OutputDirectiory' has a wrong offset!");
+static_assert(offsetof(UEXRFileCompositingOutput, FilenameFormat) == 0x000070, "Member 'UEXRFileCompositingOutput::FilenameFormat' has a wrong offset!");
+static_assert(offsetof(UEXRFileCompositingOutput, OutputFrameRate) == 0x000080, "Member 'UEXRFileCompositingOutput::OutputFrameRate' has a wrong offset!");
+static_assert(offsetof(UEXRFileCompositingOutput, Compression) == 0x000088, "Member 'UEXRFileCompositingOutput::Compression' has a wrong offset!");
+
+// Class Composure.CompositingPostProcessPass
+// 0x0018 (0x0088 - 0x0070)
+class UCompositingPostProcessPass : public UCompositingElementTransform
+{
+public:
+	float                                         RenderScale;                                       // 0x0070(0x0004)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_106B[0x4];                                     // 0x0074(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class UComposurePostProcessPassPolicy*> PostProcessPasses;                                 // 0x0078(0x0010)(Edit, BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingPostProcessPass">();
+	}
+	static class UCompositingPostProcessPass* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingPostProcessPass>();
+	}
+};
+static_assert(alignof(UCompositingPostProcessPass) == 0x000008, "Wrong alignment on UCompositingPostProcessPass");
+static_assert(sizeof(UCompositingPostProcessPass) == 0x000088, "Wrong size on UCompositingPostProcessPass");
+static_assert(offsetof(UCompositingPostProcessPass, RenderScale) == 0x000070, "Member 'UCompositingPostProcessPass::RenderScale' has a wrong offset!");
+static_assert(offsetof(UCompositingPostProcessPass, PostProcessPasses) == 0x000078, "Member 'UCompositingPostProcessPass::PostProcessPasses' has a wrong offset!");
+
+// Class Composure.CompositingElementMaterialPass
+// 0x0158 (0x01E0 - 0x0088)
+class UCompositingElementMaterialPass final : public UCompositingPostProcessPass
+{
+public:
+	struct FCompositingMaterial                   Material;                                          // 0x0088(0x0158)(Edit, BlueprintVisible, NativeAccessSpecifierPublic)
+
+public:
+	void ApplyMaterialParams(class UMaterialInstanceDynamic* Mid);
+	void SetMaterialInterface(class UMaterialInterface* NewMaterial);
+	bool SetParameterMapping(class FName TextureParamName, class FName ComposureLayerName);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingElementMaterialPass">();
+	}
+	static class UCompositingElementMaterialPass* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingElementMaterialPass>();
+	}
+};
+static_assert(alignof(UCompositingElementMaterialPass) == 0x000008, "Wrong alignment on UCompositingElementMaterialPass");
+static_assert(sizeof(UCompositingElementMaterialPass) == 0x0001E0, "Wrong size on UCompositingElementMaterialPass");
+static_assert(offsetof(UCompositingElementMaterialPass, Material) == 0x000088, "Member 'UCompositingElementMaterialPass::Material' has a wrong offset!");
+
+// Class Composure.ComposurePostProcessPass
+// 0x0020 (0x0230 - 0x0210)
+#pragma pack(push, 0x1)
+class alignas(0x10) UComposurePostProcessPass : public USceneComponent
+{
+public:
+	class USceneCaptureComponent2D*               SceneCapture;                                      // 0x0208(0x0008)(ExportObject, ZeroConstructor, Transient, InstancedReference, IsPlainOldData, NonTransactional, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	class UComposurePostProcessBlendable*         BlendableInterface;                                // 0x0210(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NonTransactional, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	class UMaterialInterface*                     SetupMaterial;                                     // 0x0218(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NonTransactional, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	class UMaterialInterface*                     TonemapperReplacement;                             // 0x0220(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NonTransactional, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+
+public:
+	void SetOutputRenderTarget(class UTextureRenderTarget2D* RenderTarget);
+	void SetSetupMaterial(class UMaterialInterface* Material);
+
+	class UTextureRenderTarget2D* GetOutputRenderTarget() const;
+	class UMaterialInterface* GetSetupMaterial() const;
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposurePostProcessPass">();
+	}
+	static class UComposurePostProcessPass* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposurePostProcessPass>();
+	}
+};
+#pragma pack(pop)
+static_assert(alignof(UComposurePostProcessPass) == 0x000010, "Wrong alignment on UComposurePostProcessPass");
+static_assert(sizeof(UComposurePostProcessPass) == 0x000230, "Wrong size on UComposurePostProcessPass");
+static_assert(offsetof(UComposurePostProcessPass, SceneCapture) == 0x000208, "Member 'UComposurePostProcessPass::SceneCapture' has a wrong offset!");
+static_assert(offsetof(UComposurePostProcessPass, BlendableInterface) == 0x000210, "Member 'UComposurePostProcessPass::BlendableInterface' has a wrong offset!");
+static_assert(offsetof(UComposurePostProcessPass, SetupMaterial) == 0x000218, "Member 'UComposurePostProcessPass::SetupMaterial' has a wrong offset!");
+static_assert(offsetof(UComposurePostProcessPass, TonemapperReplacement) == 0x000220, "Member 'UComposurePostProcessPass::TonemapperReplacement' has a wrong offset!");
+
+// Class Composure.CompositingTonemapPass
+// 0x0170 (0x01E0 - 0x0070)
+class UCompositingTonemapPass final : public UCompositingElementTransform
+{
+public:
+	struct FColorGradingSettings                  ColorGradingSettings;                              // 0x0070(0x0150)(Edit, BlueprintVisible, Interp, NoDestructor, NativeAccessSpecifierPublic)
+	struct FFilmStockSettings                     FilmStockSettings;                                 // 0x01C0(0x0014)(Edit, BlueprintVisible, Interp, NoDestructor, NativeAccessSpecifierPublic)
+	float                                         ChromaticAberration;                               // 0x01D4(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, Interp, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UComposureTonemapperPassPolicy*         TonemapPolicy;                                     // 0x01D8(0x0008)(ZeroConstructor, Transient, DuplicateTransient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingTonemapPass">();
+	}
+	static class UCompositingTonemapPass* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingTonemapPass>();
+	}
+};
+static_assert(alignof(UCompositingTonemapPass) == 0x000010, "Wrong alignment on UCompositingTonemapPass");
+static_assert(sizeof(UCompositingTonemapPass) == 0x0001E0, "Wrong size on UCompositingTonemapPass");
+static_assert(offsetof(UCompositingTonemapPass, ColorGradingSettings) == 0x000070, "Member 'UCompositingTonemapPass::ColorGradingSettings' has a wrong offset!");
+static_assert(offsetof(UCompositingTonemapPass, FilmStockSettings) == 0x0001C0, "Member 'UCompositingTonemapPass::FilmStockSettings' has a wrong offset!");
+static_assert(offsetof(UCompositingTonemapPass, ChromaticAberration) == 0x0001D4, "Member 'UCompositingTonemapPass::ChromaticAberration' has a wrong offset!");
+static_assert(offsetof(UCompositingTonemapPass, TonemapPolicy) == 0x0001D8, "Member 'UCompositingTonemapPass::TonemapPolicy' has a wrong offset!");
+
+// Class Composure.MultiPassChromaKeyer
+// 0x0170 (0x01E0 - 0x0070)
+class UMultiPassChromaKeyer final : public UCompositingElementTransform
+{
+public:
+	TArray<struct FLinearColor>                   KeyColors;                                         // 0x0070(0x0010)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FCompositingMaterial                   KeyerMaterial;                                     // 0x0080(0x0158)(Edit, BlueprintVisible, BlueprintReadOnly, NativeAccessSpecifierPublic)
+	class UTexture*                               DefaultWhiteTexture;                               // 0x01D8(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"MultiPassChromaKeyer">();
+	}
+	static class UMultiPassChromaKeyer* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UMultiPassChromaKeyer>();
+	}
+};
+static_assert(alignof(UMultiPassChromaKeyer) == 0x000008, "Wrong alignment on UMultiPassChromaKeyer");
+static_assert(sizeof(UMultiPassChromaKeyer) == 0x0001E0, "Wrong size on UMultiPassChromaKeyer");
+static_assert(offsetof(UMultiPassChromaKeyer, KeyColors) == 0x000070, "Member 'UMultiPassChromaKeyer::KeyColors' has a wrong offset!");
+static_assert(offsetof(UMultiPassChromaKeyer, KeyerMaterial) == 0x000080, "Member 'UMultiPassChromaKeyer::KeyerMaterial' has a wrong offset!");
+static_assert(offsetof(UMultiPassChromaKeyer, DefaultWhiteTexture) == 0x0001D8, "Member 'UMultiPassChromaKeyer::DefaultWhiteTexture' has a wrong offset!");
+
+// Class Composure.MultiPassDespill
+// 0x0170 (0x01E0 - 0x0070)
+class UMultiPassDespill final : public UCompositingElementTransform
+{
+public:
+	TArray<struct FLinearColor>                   KeyColors;                                         // 0x0070(0x0010)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FCompositingMaterial                   KeyerMaterial;                                     // 0x0080(0x0158)(Edit, BlueprintVisible, BlueprintReadOnly, NativeAccessSpecifierPublic)
+	class UTexture*                               DefaultWhiteTexture;                               // 0x01D8(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"MultiPassDespill">();
+	}
+	static class UMultiPassDespill* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UMultiPassDespill>();
+	}
+};
+static_assert(alignof(UMultiPassDespill) == 0x000008, "Wrong alignment on UMultiPassDespill");
+static_assert(sizeof(UMultiPassDespill) == 0x0001E0, "Wrong size on UMultiPassDespill");
+static_assert(offsetof(UMultiPassDespill, KeyColors) == 0x000070, "Member 'UMultiPassDespill::KeyColors' has a wrong offset!");
+static_assert(offsetof(UMultiPassDespill, KeyerMaterial) == 0x000080, "Member 'UMultiPassDespill::KeyerMaterial' has a wrong offset!");
+static_assert(offsetof(UMultiPassDespill, DefaultWhiteTexture) == 0x0001D8, "Member 'UMultiPassDespill::DefaultWhiteTexture' has a wrong offset!");
+
+// Class Composure.CompositingOpenColorIOPass
+// 0x0058 (0x00C8 - 0x0070)
+class UCompositingOpenColorIOPass final : public UCompositingElementTransform
+{
+public:
+	struct FOpenColorIOColorConversionSettings    ColorConversionSettings;                           // 0x0070(0x0058)(Edit, BlueprintVisible, Interp, NativeAccessSpecifierPublic)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingOpenColorIOPass">();
+	}
+	static class UCompositingOpenColorIOPass* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UCompositingOpenColorIOPass>();
+	}
+};
+static_assert(alignof(UCompositingOpenColorIOPass) == 0x000008, "Wrong alignment on UCompositingOpenColorIOPass");
+static_assert(sizeof(UCompositingOpenColorIOPass) == 0x0000C8, "Wrong size on UCompositingOpenColorIOPass");
+static_assert(offsetof(UCompositingOpenColorIOPass, ColorConversionSettings) == 0x000070, "Member 'UCompositingOpenColorIOPass::ColorConversionSettings' has a wrong offset!");
+
+// Class Composure.ComposureBlueprintLibrary
+// 0x0000 (0x0028 - 0x0028)
+class UComposureBlueprintLibrary final : public UBlueprintFunctionLibrary
+{
+public:
+	static bool AttachComposureElement(const class FName ParentName, const class FName ChildName);
+	static void CopyCameraSettingsToSceneCapture(class UCameraComponent* SrcCamera, class USceneCaptureComponent2D* DstCaptureComponent, float OriginalFocalLength, float OverscanFactor);
+	static class ACompositingElement* CreateComposureElement(const class FName ElementName, TSubclassOf<class ACompositingElement> ClassType, class AActor* LevelContext);
+	static class UComposurePlayerCompositingTarget* CreatePlayerCompositingTarget(class UObject* WorldContextObject);
+	static void DeleteComposureElementAndChildren(const class FName ElementToDelete);
+	static class ACompositingElement* GetComposureElement(const class FName ElementName);
+	static void GetCroppingUVTransformationMatrixFromPostMoveSettings(const struct FComposurePostMoveSettings& PostMoveSettings, float AspectRatio, struct FMatrix* CropingUVTransformationMatrix, struct FMatrix* UncropingUVTransformationMatrix);
+	static void GetPlayerDisplayGamma(const class APlayerCameraManager* PlayerCameraManager, float* DisplayGamma);
+	static void GetProjectionMatrixFromPostMoveSettings(const struct FComposurePostMoveSettings& PostMoveSettings, float HorizontalFOVAngle, float AspectRatio, struct FMatrix* ProjectionMatrix);
+	static void GetRedGreenUVFactorsFromChromaticAberration(float ChromaticAberrationAmount, struct FVector2D* RedGreenUVFactors);
+	static void InvertUVDisplacementMapEncodingParameters(const struct FVector2D& In, struct FVector2D* Out);
+	static bool IsComposureElementDrawing(class ACompositingElement* CompElement);
+	static void RefreshComposureElementList();
+	static bool RenameComposureElement(const class FName OriginalElementName, const class FName NewElementName);
+	static void RequestRedrawComposureViewport();
+	static void SetUVMapSettingsToMaterialParameters(const struct FComposureUVMapSettings& UVMapSettings, class UMaterialInstanceDynamic* Material);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposureBlueprintLibrary">();
+	}
+	static class UComposureBlueprintLibrary* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposureBlueprintLibrary>();
+	}
+};
+static_assert(alignof(UComposureBlueprintLibrary) == 0x000008, "Wrong alignment on UComposureBlueprintLibrary");
+static_assert(sizeof(UComposureBlueprintLibrary) == 0x000028, "Wrong size on UComposureBlueprintLibrary");
+
+// Class Composure.ComposureGameSettings
+// 0x0040 (0x0068 - 0x0028)
+class UComposureGameSettings final : public UObject
+{
+public:
+	struct FSoftObjectPath                        StaticVideoPlateDebugImage;                        // 0x0028(0x0018)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, Config, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSceneCapWarnOfMissingCam;                         // 0x0040(0x0001)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1073[0x7];                                     // 0x0041(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FSoftObjectPath                        FallbackCompositingTexture;                        // 0x0048(0x0018)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, Config, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UTexture*                               FallbackCompositingTextureObj;                     // 0x0060(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposureGameSettings">();
+	}
+	static class UComposureGameSettings* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposureGameSettings>();
+	}
+};
+static_assert(alignof(UComposureGameSettings) == 0x000008, "Wrong alignment on UComposureGameSettings");
+static_assert(sizeof(UComposureGameSettings) == 0x000068, "Wrong size on UComposureGameSettings");
+static_assert(offsetof(UComposureGameSettings, StaticVideoPlateDebugImage) == 0x000028, "Member 'UComposureGameSettings::StaticVideoPlateDebugImage' has a wrong offset!");
+static_assert(offsetof(UComposureGameSettings, bSceneCapWarnOfMissingCam) == 0x000040, "Member 'UComposureGameSettings::bSceneCapWarnOfMissingCam' has a wrong offset!");
+static_assert(offsetof(UComposureGameSettings, FallbackCompositingTexture) == 0x000048, "Member 'UComposureGameSettings::FallbackCompositingTexture' has a wrong offset!");
+static_assert(offsetof(UComposureGameSettings, FallbackCompositingTextureObj) == 0x000060, "Member 'UComposureGameSettings::FallbackCompositingTextureObj' has a wrong offset!");
+
+// Class Composure.ComposureLensBloomPass
+// 0x00C0 (0x02F0 - 0x0230)
+class UComposureLensBloomPass final : public UComposurePostProcessPass
+{
+public:
+	struct FLensBloomSettings                     Settings;                                          // 0x0228(0x00B8)(Edit, BlueprintVisible, Interp, NoDestructor, NativeAccessSpecifierPublic)
+	class UMaterialInstanceDynamic*               TonemapperReplacingMID;                            // 0x02E0(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	uint8                                         Pad_1074[0x8];                                     // 0x02E8(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	void BloomToRenderTarget();
+	void SetTonemapperReplacingMaterial(class UMaterialInstanceDynamic* Material);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposureLensBloomPass">();
+	}
+	static class UComposureLensBloomPass* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposureLensBloomPass>();
+	}
+};
+static_assert(alignof(UComposureLensBloomPass) == 0x000010, "Wrong alignment on UComposureLensBloomPass");
+static_assert(sizeof(UComposureLensBloomPass) == 0x0002F0, "Wrong size on UComposureLensBloomPass");
+static_assert(offsetof(UComposureLensBloomPass, Settings) == 0x000228, "Member 'UComposureLensBloomPass::Settings' has a wrong offset!");
+static_assert(offsetof(UComposureLensBloomPass, TonemapperReplacingMID) == 0x0002E0, "Member 'UComposureLensBloomPass::TonemapperReplacingMID' has a wrong offset!");
+
+// Class Composure.ComposureLensBloomPassPolicy
+// 0x00D0 (0x00F8 - 0x0028)
+class UComposureLensBloomPassPolicy final : public UComposurePostProcessPassPolicy
+{
+public:
+	struct FLensBloomSettings                     Settings;                                          // 0x0028(0x00B8)(Edit, BlueprintVisible, Interp, NoDestructor, NativeAccessSpecifierPublic)
+	class UMaterialInterface*                     ReplacementMaterial;                               // 0x00E0(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, AdvancedDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   BloomIntensityParamName;                           // 0x00E8(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, AdvancedDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UMaterialInstanceDynamic*               TonemapperReplacmentMID;                           // 0x00F0(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposureLensBloomPassPolicy">();
+	}
+	static class UComposureLensBloomPassPolicy* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposureLensBloomPassPolicy>();
+	}
+};
+static_assert(alignof(UComposureLensBloomPassPolicy) == 0x000008, "Wrong alignment on UComposureLensBloomPassPolicy");
+static_assert(sizeof(UComposureLensBloomPassPolicy) == 0x0000F8, "Wrong size on UComposureLensBloomPassPolicy");
+static_assert(offsetof(UComposureLensBloomPassPolicy, Settings) == 0x000028, "Member 'UComposureLensBloomPassPolicy::Settings' has a wrong offset!");
+static_assert(offsetof(UComposureLensBloomPassPolicy, ReplacementMaterial) == 0x0000E0, "Member 'UComposureLensBloomPassPolicy::ReplacementMaterial' has a wrong offset!");
+static_assert(offsetof(UComposureLensBloomPassPolicy, BloomIntensityParamName) == 0x0000E8, "Member 'UComposureLensBloomPassPolicy::BloomIntensityParamName' has a wrong offset!");
+static_assert(offsetof(UComposureLensBloomPassPolicy, TonemapperReplacmentMID) == 0x0000F0, "Member 'UComposureLensBloomPassPolicy::TonemapperReplacmentMID' has a wrong offset!");
+
+// Class Composure.ComposurePlayerCompositingCameraModifier
+// 0x0018 (0x0060 - 0x0048)
+class UComposurePlayerCompositingCameraModifier final : public UCameraModifier
+{
+public:
+	uint8                                         Pad_1075[0x8];                                     // 0x0048(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	TScriptInterface<class IComposurePlayerCompositingInterface> Target;                                            // 0x0050(0x0010)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, UObjectWrapper, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposurePlayerCompositingCameraModifier">();
+	}
+	static class UComposurePlayerCompositingCameraModifier* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposurePlayerCompositingCameraModifier>();
+	}
+};
+static_assert(alignof(UComposurePlayerCompositingCameraModifier) == 0x000008, "Wrong alignment on UComposurePlayerCompositingCameraModifier");
+static_assert(sizeof(UComposurePlayerCompositingCameraModifier) == 0x000060, "Wrong size on UComposurePlayerCompositingCameraModifier");
+static_assert(offsetof(UComposurePlayerCompositingCameraModifier, Target) == 0x000050, "Member 'UComposurePlayerCompositingCameraModifier::Target' has a wrong offset!");
+
+// Class Composure.ComposurePlayerCompositingInterface
+// 0x0000 (0x0028 - 0x0028)
+class IComposurePlayerCompositingInterface final : public IInterface
+{
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposurePlayerCompositingInterface">();
+	}
+	static class IComposurePlayerCompositingInterface* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<IComposurePlayerCompositingInterface>();
+	}
+};
+static_assert(alignof(IComposurePlayerCompositingInterface) == 0x000008, "Wrong alignment on IComposurePlayerCompositingInterface");
+static_assert(sizeof(IComposurePlayerCompositingInterface) == 0x000028, "Wrong size on IComposurePlayerCompositingInterface");
+
+// Class Composure.ComposurePlayerCompositingTarget
+// 0x0050 (0x0078 - 0x0028)
+class UComposurePlayerCompositingTarget final : public UObject
+{
+public:
+	uint8                                         Pad_1076[0x8];                                     // 0x0028(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	class APlayerCameraManager*                   PlayerCameraManager;                               // 0x0030(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class UComposurePlayerCompositingCameraModifier* PlayerCameraModifier;                              // 0x0038(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class UMaterialInstanceDynamic*               ReplaceTonemapperMID;                              // 0x0040(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	uint8                                         Pad_1077[0x30];                                    // 0x0048(0x0030)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	class APlayerCameraManager* SetPlayerCameraManager(class APlayerCameraManager* Param_PlayerCameraManager);
+	void SetRenderTarget(class UTextureRenderTarget2D* RenderTarget);
+
+	class APlayerCameraManager* GetPlayerCameraManager() const;
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposurePlayerCompositingTarget">();
+	}
+	static class UComposurePlayerCompositingTarget* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposurePlayerCompositingTarget>();
+	}
+};
+static_assert(alignof(UComposurePlayerCompositingTarget) == 0x000008, "Wrong alignment on UComposurePlayerCompositingTarget");
+static_assert(sizeof(UComposurePlayerCompositingTarget) == 0x000078, "Wrong size on UComposurePlayerCompositingTarget");
+static_assert(offsetof(UComposurePlayerCompositingTarget, PlayerCameraManager) == 0x000030, "Member 'UComposurePlayerCompositingTarget::PlayerCameraManager' has a wrong offset!");
+static_assert(offsetof(UComposurePlayerCompositingTarget, PlayerCameraModifier) == 0x000038, "Member 'UComposurePlayerCompositingTarget::PlayerCameraModifier' has a wrong offset!");
+static_assert(offsetof(UComposurePlayerCompositingTarget, ReplaceTonemapperMID) == 0x000040, "Member 'UComposurePlayerCompositingTarget::ReplaceTonemapperMID' has a wrong offset!");
+
+// Class Composure.ComposureCompositingTargetComponent
+// 0x0010 (0x00C8 - 0x00B8)
+class UComposureCompositingTargetComponent final : public UActorComponent
+{
+public:
+	uint8                                         Pad_1078[0x8];                                     // 0x00B8(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	class UTexture*                               DisplayTexture;                                    // 0x00C0(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	void SetDisplayTexture(class UTexture* Param_DisplayTexture);
+
+	class UTexture* GetDisplayTexture() const;
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposureCompositingTargetComponent">();
+	}
+	static class UComposureCompositingTargetComponent* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposureCompositingTargetComponent>();
+	}
+};
+static_assert(alignof(UComposureCompositingTargetComponent) == 0x000008, "Wrong alignment on UComposureCompositingTargetComponent");
+static_assert(sizeof(UComposureCompositingTargetComponent) == 0x0000C8, "Wrong size on UComposureCompositingTargetComponent");
+static_assert(offsetof(UComposureCompositingTargetComponent, DisplayTexture) == 0x0000C0, "Member 'UComposureCompositingTargetComponent::DisplayTexture' has a wrong offset!");
+
+// Class Composure.ComposurePostProcessBlendable
+// 0x0010 (0x0038 - 0x0028)
+class UComposurePostProcessBlendable final : public UObject
+{
+public:
+	uint8                                         Pad_1079[0x8];                                     // 0x0028(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	class UComposurePostProcessPass*              Target;                                            // 0x0030(0x0008)(ExportObject, ZeroConstructor, Transient, InstancedReference, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposurePostProcessBlendable">();
+	}
+	static class UComposurePostProcessBlendable* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposurePostProcessBlendable>();
+	}
+};
+static_assert(alignof(UComposurePostProcessBlendable) == 0x000008, "Wrong alignment on UComposurePostProcessBlendable");
+static_assert(sizeof(UComposurePostProcessBlendable) == 0x000038, "Wrong size on UComposurePostProcessBlendable");
+static_assert(offsetof(UComposurePostProcessBlendable, Target) == 0x000030, "Member 'UComposurePostProcessBlendable::Target' has a wrong offset!");
+
+// Class Composure.ComposurePostProcessingPassProxy
+// 0x0000 (0x0230 - 0x0230)
+class UComposurePostProcessingPassProxy final : public UComposurePostProcessPass
+{
+public:
+	class UMaterialInstanceDynamic*               SetupMID;                                          // 0x0228(0x0008)(ZeroConstructor, Transient, DuplicateTransient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	void Execute(class UTexture* PrePassInput, class UComposurePostProcessPassPolicy* PostProcessPass);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposurePostProcessingPassProxy">();
+	}
+	static class UComposurePostProcessingPassProxy* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposurePostProcessingPassProxy>();
+	}
+};
+static_assert(alignof(UComposurePostProcessingPassProxy) == 0x000010, "Wrong alignment on UComposurePostProcessingPassProxy");
+static_assert(sizeof(UComposurePostProcessingPassProxy) == 0x000230, "Wrong size on UComposurePostProcessingPassProxy");
+static_assert(offsetof(UComposurePostProcessingPassProxy, SetupMID) == 0x000228, "Member 'UComposurePostProcessingPassProxy::SetupMID' has a wrong offset!");
+
+// Class Composure.ComposureTonemapperPass
+// 0x0170 (0x03A0 - 0x0230)
+class UComposureTonemapperPass final : public UComposurePostProcessPass
+{
+public:
+	uint8                                         Pad_107A[0x8];                                     // 0x0228(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FColorGradingSettings                  ColorGradingSettings;                              // 0x0230(0x0150)(Edit, BlueprintVisible, Interp, NoDestructor, NativeAccessSpecifierPublic)
+	struct FFilmStockSettings                     FilmStockSettings;                                 // 0x0380(0x0014)(Edit, BlueprintVisible, Interp, NoDestructor, NativeAccessSpecifierPublic)
+	float                                         ChromaticAberration;                               // 0x0394(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, Interp, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_107B[0x8];                                     // 0x0398(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	void TonemapToRenderTarget();
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposureTonemapperPass">();
+	}
+	static class UComposureTonemapperPass* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposureTonemapperPass>();
+	}
+};
+static_assert(alignof(UComposureTonemapperPass) == 0x000010, "Wrong alignment on UComposureTonemapperPass");
+static_assert(sizeof(UComposureTonemapperPass) == 0x0003A0, "Wrong size on UComposureTonemapperPass");
+static_assert(offsetof(UComposureTonemapperPass, ColorGradingSettings) == 0x000230, "Member 'UComposureTonemapperPass::ColorGradingSettings' has a wrong offset!");
+static_assert(offsetof(UComposureTonemapperPass, FilmStockSettings) == 0x000380, "Member 'UComposureTonemapperPass::FilmStockSettings' has a wrong offset!");
+static_assert(offsetof(UComposureTonemapperPass, ChromaticAberration) == 0x000394, "Member 'UComposureTonemapperPass::ChromaticAberration' has a wrong offset!");
+
+// Class Composure.ComposureTonemapperPassPolicy
+// 0x0178 (0x01A0 - 0x0028)
+class UComposureTonemapperPassPolicy final : public UComposurePostProcessPassPolicy
+{
+public:
+	uint8                                         Pad_107C[0x8];                                     // 0x0028(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FColorGradingSettings                  ColorGradingSettings;                              // 0x0030(0x0150)(Edit, BlueprintVisible, Interp, NoDestructor, NativeAccessSpecifierPublic)
+	struct FFilmStockSettings                     FilmStockSettings;                                 // 0x0180(0x0014)(Edit, BlueprintVisible, Interp, NoDestructor, NativeAccessSpecifierPublic)
+	float                                         ChromaticAberration;                               // 0x0194(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, Interp, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_107D[0x8];                                     // 0x0198(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ComposureTonemapperPassPolicy">();
+	}
+	static class UComposureTonemapperPassPolicy* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UComposureTonemapperPassPolicy>();
+	}
+};
+static_assert(alignof(UComposureTonemapperPassPolicy) == 0x000010, "Wrong alignment on UComposureTonemapperPassPolicy");
+static_assert(sizeof(UComposureTonemapperPassPolicy) == 0x0001A0, "Wrong size on UComposureTonemapperPassPolicy");
+static_assert(offsetof(UComposureTonemapperPassPolicy, ColorGradingSettings) == 0x000030, "Member 'UComposureTonemapperPassPolicy::ColorGradingSettings' has a wrong offset!");
+static_assert(offsetof(UComposureTonemapperPassPolicy, FilmStockSettings) == 0x000180, "Member 'UComposureTonemapperPassPolicy::FilmStockSettings' has a wrong offset!");
+static_assert(offsetof(UComposureTonemapperPassPolicy, ChromaticAberration) == 0x000194, "Member 'UComposureTonemapperPassPolicy::ChromaticAberration' has a wrong offset!");
+
+// Class Composure.CompositingTextureLookupTable
+// 0x0000 (0x0028 - 0x0028)
+class ICompositingTextureLookupTable final : public IInterface
+{
+public:
+	bool FindNamedPassResult(class FName LookupName, class UTexture** OutTexture) const;
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"CompositingTextureLookupTable">();
+	}
+	static class ICompositingTextureLookupTable* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<ICompositingTextureLookupTable>();
+	}
+};
+static_assert(alignof(ICompositingTextureLookupTable) == 0x000008, "Wrong alignment on ICompositingTextureLookupTable");
+static_assert(sizeof(ICompositingTextureLookupTable) == 0x000028, "Wrong size on ICompositingTextureLookupTable");
+
+// Class Composure.MovieSceneComposureExportClient
+// 0x0000 (0x0028 - 0x0028)
+class IMovieSceneComposureExportClient final : public IInterface
+{
+public:
+	void InitializeForExport(class UMovieSceneComposureExportInitializer* ExportInitializer);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"MovieSceneComposureExportClient">();
+	}
+	static class IMovieSceneComposureExportClient* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<IMovieSceneComposureExportClient>();
+	}
+};
+static_assert(alignof(IMovieSceneComposureExportClient) == 0x000008, "Wrong alignment on IMovieSceneComposureExportClient");
+static_assert(sizeof(IMovieSceneComposureExportClient) == 0x000028, "Wrong size on IMovieSceneComposureExportClient");
+
+// Class Composure.MovieSceneComposureExportInitializer
+// 0x0010 (0x0038 - 0x0028)
+class UMovieSceneComposureExportInitializer final : public UObject
+{
+public:
+	uint8                                         Pad_107F[0x10];                                    // 0x0028(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	void ExportSceneCaptureBuffers(class ACompositingElement* CompShotElement, class USceneCaptureComponent2D* SceneCapture, const TArray<class FString>& BuffersToExport);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"MovieSceneComposureExportInitializer">();
+	}
+	static class UMovieSceneComposureExportInitializer* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UMovieSceneComposureExportInitializer>();
+	}
+};
+static_assert(alignof(UMovieSceneComposureExportInitializer) == 0x000008, "Wrong alignment on UMovieSceneComposureExportInitializer");
+static_assert(sizeof(UMovieSceneComposureExportInitializer) == 0x000038, "Wrong size on UMovieSceneComposureExportInitializer");
+
+// Class Composure.MovieSceneComposureExportTrack
+// 0x0030 (0x00C0 - 0x0090)
+class UMovieSceneComposureExportTrack final : public UMovieSceneTrack
+{
+public:
+	uint8                                         Pad_1080[0x8];                                     // 0x0090(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FMovieSceneComposureExportPass         Pass;                                              // 0x0098(0x0014)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1081[0x4];                                     // 0x00AC(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class UMovieSceneSection*>             Sections;                                          // 0x00B0(0x0010)(ExportObject, ZeroConstructor, ContainsInstancedReference, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"MovieSceneComposureExportTrack">();
+	}
+	static class UMovieSceneComposureExportTrack* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UMovieSceneComposureExportTrack>();
+	}
+};
+static_assert(alignof(UMovieSceneComposureExportTrack) == 0x000008, "Wrong alignment on UMovieSceneComposureExportTrack");
+static_assert(sizeof(UMovieSceneComposureExportTrack) == 0x0000C0, "Wrong size on UMovieSceneComposureExportTrack");
+static_assert(offsetof(UMovieSceneComposureExportTrack, Pass) == 0x000098, "Member 'UMovieSceneComposureExportTrack::Pass' has a wrong offset!");
+static_assert(offsetof(UMovieSceneComposureExportTrack, Sections) == 0x0000B0, "Member 'UMovieSceneComposureExportTrack::Sections' has a wrong offset!");
+
+// Class Composure.MovieSceneComposureExportSection
+// 0x0000 (0x00E8 - 0x00E8)
+class UMovieSceneComposureExportSection final : public UMovieSceneSection
+{
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"MovieSceneComposureExportSection">();
+	}
+	static class UMovieSceneComposureExportSection* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UMovieSceneComposureExportSection>();
+	}
+};
+static_assert(alignof(UMovieSceneComposureExportSection) == 0x000008, "Wrong alignment on UMovieSceneComposureExportSection");
+static_assert(sizeof(UMovieSceneComposureExportSection) == 0x0000E8, "Wrong size on UMovieSceneComposureExportSection");
+
+// Class Composure.MovieSceneComposurePostMoveSettingsSection
+// 0x03C0 (0x04A8 - 0x00E8)
+class UMovieSceneComposurePostMoveSettingsSection final : public UMovieSceneSection
+{
+public:
+	struct FMovieSceneFloatChannel                Pivot[0x2];                                        // 0x00E8(0x00A0)(NativeAccessSpecifierPublic)
+	struct FMovieSceneFloatChannel                Translation[0x2];                                  // 0x0228(0x00A0)(NativeAccessSpecifierPublic)
+	struct FMovieSceneFloatChannel                RotationAngle;                                     // 0x0368(0x00A0)(NativeAccessSpecifierPublic)
+	struct FMovieSceneFloatChannel                Scale;                                             // 0x0408(0x00A0)(NativeAccessSpecifierPublic)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"MovieSceneComposurePostMoveSettingsSection">();
+	}
+	static class UMovieSceneComposurePostMoveSettingsSection* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UMovieSceneComposurePostMoveSettingsSection>();
+	}
+};
+static_assert(alignof(UMovieSceneComposurePostMoveSettingsSection) == 0x000008, "Wrong alignment on UMovieSceneComposurePostMoveSettingsSection");
+static_assert(sizeof(UMovieSceneComposurePostMoveSettingsSection) == 0x0004A8, "Wrong size on UMovieSceneComposurePostMoveSettingsSection");
+static_assert(offsetof(UMovieSceneComposurePostMoveSettingsSection, Pivot) == 0x0000E8, "Member 'UMovieSceneComposurePostMoveSettingsSection::Pivot' has a wrong offset!");
+static_assert(offsetof(UMovieSceneComposurePostMoveSettingsSection, Translation) == 0x000228, "Member 'UMovieSceneComposurePostMoveSettingsSection::Translation' has a wrong offset!");
+static_assert(offsetof(UMovieSceneComposurePostMoveSettingsSection, RotationAngle) == 0x000368, "Member 'UMovieSceneComposurePostMoveSettingsSection::RotationAngle' has a wrong offset!");
+static_assert(offsetof(UMovieSceneComposurePostMoveSettingsSection, Scale) == 0x000408, "Member 'UMovieSceneComposurePostMoveSettingsSection::Scale' has a wrong offset!");
+
+// Class Composure.MovieSceneComposurePostMoveSettingsTrack
+// 0x0008 (0x00C8 - 0x00C0)
+class UMovieSceneComposurePostMoveSettingsTrack final : public UMovieScenePropertyTrack
+{
+public:
+	uint8                                         Pad_1082[0x8];                                     // 0x00C0(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"MovieSceneComposurePostMoveSettingsTrack">();
+	}
+	static class UMovieSceneComposurePostMoveSettingsTrack* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UMovieSceneComposurePostMoveSettingsTrack>();
+	}
+};
+static_assert(alignof(UMovieSceneComposurePostMoveSettingsTrack) == 0x000008, "Wrong alignment on UMovieSceneComposurePostMoveSettingsTrack");
+static_assert(sizeof(UMovieSceneComposurePostMoveSettingsTrack) == 0x0000C8, "Wrong size on UMovieSceneComposurePostMoveSettingsTrack");
+
+// Class Composure.PlayerViewportCompositingOutput
+// 0x0038 (0x00B0 - 0x0078)
+class UPlayerViewportCompositingOutput final : public UColorConverterOutputPass
+{
+public:
+	uint8                                         Pad_1083[0x8];                                     // 0x0078(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         PlayerIndex;                                       // 0x0080(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1084[0x4];                                     // 0x0084(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class UPlayerCompOutputCameraModifier*        ActiveCamModifier;                                 // 0x0088(0x0008)(ZeroConstructor, Transient, DuplicateTransient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class UMaterialInterface*                     TonemapperBaseMat;                                 // 0x0090(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class UMaterialInterface*                     PreTonemapBaseMat;                                 // 0x0098(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class UMaterialInstanceDynamic*               ViewportOverrideMID;                               // 0x00A0(0x0008)(ZeroConstructor, Transient, DuplicateTransient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	uint8                                         Pad_1085[0x8];                                     // 0x00A8(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"PlayerViewportCompositingOutput">();
+	}
+	static class UPlayerViewportCompositingOutput* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UPlayerViewportCompositingOutput>();
+	}
+};
+static_assert(alignof(UPlayerViewportCompositingOutput) == 0x000008, "Wrong alignment on UPlayerViewportCompositingOutput");
+static_assert(sizeof(UPlayerViewportCompositingOutput) == 0x0000B0, "Wrong size on UPlayerViewportCompositingOutput");
+static_assert(offsetof(UPlayerViewportCompositingOutput, PlayerIndex) == 0x000080, "Member 'UPlayerViewportCompositingOutput::PlayerIndex' has a wrong offset!");
+static_assert(offsetof(UPlayerViewportCompositingOutput, ActiveCamModifier) == 0x000088, "Member 'UPlayerViewportCompositingOutput::ActiveCamModifier' has a wrong offset!");
+static_assert(offsetof(UPlayerViewportCompositingOutput, TonemapperBaseMat) == 0x000090, "Member 'UPlayerViewportCompositingOutput::TonemapperBaseMat' has a wrong offset!");
+static_assert(offsetof(UPlayerViewportCompositingOutput, PreTonemapBaseMat) == 0x000098, "Member 'UPlayerViewportCompositingOutput::PreTonemapBaseMat' has a wrong offset!");
+static_assert(offsetof(UPlayerViewportCompositingOutput, ViewportOverrideMID) == 0x0000A0, "Member 'UPlayerViewportCompositingOutput::ViewportOverrideMID' has a wrong offset!");
+
+// Class Composure.PlayerCompOutputCameraModifier
+// 0x0008 (0x0050 - 0x0048)
+class UPlayerCompOutputCameraModifier final : public UCameraModifier
+{
+public:
+	class UPlayerViewportCompositingOutput*       Owner;                                             // 0x0048(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"PlayerCompOutputCameraModifier">();
+	}
+	static class UPlayerCompOutputCameraModifier* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UPlayerCompOutputCameraModifier>();
+	}
+};
+static_assert(alignof(UPlayerCompOutputCameraModifier) == 0x000008, "Wrong alignment on UPlayerCompOutputCameraModifier");
+static_assert(sizeof(UPlayerCompOutputCameraModifier) == 0x000050, "Wrong size on UPlayerCompOutputCameraModifier");
+static_assert(offsetof(UPlayerCompOutputCameraModifier, Owner) == 0x000048, "Member 'UPlayerCompOutputCameraModifier::Owner' has a wrong offset!");
+
+}
+
