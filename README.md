@@ -47,7 +47,7 @@
 
 - GWorld = BLUEPROTOCOL-Win64-Shipping.exe + 0x07A848D0
 
-- GObject = BLUEPROTOCOL-Win64-Shipping.exe + 0x05C843D0
+- GName = BLUEPROTOCOL-Win64-Shipping.exe + 0x05C843D0
 
  ```console
 Off::UStruct::Children: 0x48
