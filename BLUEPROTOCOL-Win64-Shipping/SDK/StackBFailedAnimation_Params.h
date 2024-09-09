@@ -1,0 +1,58 @@
+﻿#pragma once
+
+/**
+ * Name: BLUEPROTOCOL-Win64-Shipping
+ * Version: 1.6.0
+ */
+
+#ifdef _MSC_VER
+	#pragma pack(push, 0x01)
+#endif
+
+namespace CG
+{
+	// --------------------------------------------------
+	// # Structs
+	// --------------------------------------------------
+	/**
+	 * Function StackBFailedAnimation.StackBFailedAnimation_C.AnimaterinComplete
+	 */
+	struct UStackBFailedAnimation_C_AnimaterinComplete_Params
+	{	};
+
+	/**
+	 * Function StackBFailedAnimation.StackBFailedAnimation_C.OnAnimationFinished
+	 */
+	struct UStackBFailedAnimation_C_OnAnimationFinished_Params
+	{
+	public:
+		class UWidgetAnimation*                                    Animation;                                               // 0x0000(0x0008)  (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	};
+
+	/**
+	 * Function StackBFailedAnimation.StackBFailedAnimation_C.Play
+	 */
+	struct UStackBFailedAnimation_C_Play_Params
+	{	};
+
+	/**
+	 * Function StackBFailedAnimation.StackBFailedAnimation_C.ExecuteUbergraph_StackBFailedAnimation
+	 */
+	struct UStackBFailedAnimation_C_ExecuteUbergraph_StackBFailedAnimation_Params
+	{
+	public:
+		int32_t                                                    EntryPoint;                                              // 0x0000(0x0004)  (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+		unsigned char                                              UnknownData_OGYC[0x4];                                   // 0x0004(0x0004) MISSED OFFSET (FIX SPACE BETWEEN PREVIOUS PROPERTY) ()
+	};
+
+	/**
+	 * Function StackBFailedAnimation.StackBFailedAnimation_C.OnAnimPlayed__DelegateSignature
+	 */
+	struct UStackBFailedAnimation_C_OnAnimPlayed__DelegateSignature_Params
+	{	};
+
+}
+
+#ifdef _MSC_VER
+	#pragma pack(pop)
+#endif

@@ -1,0 +1,79 @@
+﻿  pch.cpp
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(21,30): error C2504: “USBCommandMenuChildBase”: 未定义基类
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(24,62): error C2079: “CG::UGuildData_C::UberGraphFrame”使用未定义的 struct“CG::FPointerToUberGraphFrame”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(55,62): error C2079: “CG::UGuildData_C::OnGuildSetting”使用未定义的 class“CG::FScriptMulticastDelegate”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(56,62): error C2079: “CG::UGuildData_C::OnGuildMember”使用未定义的 class“CG::FScriptMulticastDelegate”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(57,62): error C2079: “CG::UGuildData_C::OnGuildApplications”使用未定义的 class“CG::FScriptMulticastDelegate”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(58,62): error C2079: “CG::UGuildData_C::OnGuildOrganize”使用未定义的 class“CG::FScriptMulticastDelegate”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(59,62): error C2079: “CG::UGuildData_C::OnSelectEntry”使用未定义的 class“CG::FScriptMulticastDelegate”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(60,62): error C2079: “CG::UGuildData_C::OnRefreshRightMenu”使用未定义的 class“CG::FScriptMulticastDelegate”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(61,9): error C2143: 语法错误: 缺少“;”(在“<”的前面)
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(61,3): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(61,78): error C2238: 意外的标记位于“;”之前
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(62,9): error C2143: 语法错误: 缺少“;”(在“<”的前面)
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(62,3): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(62,80): error C2238: 意外的标记位于“;”之前
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(63,62): error C2079: “CG::UGuildData_C::SetNowTutorialHelpId”使用未定义的 class“CG::FScriptMulticastDelegate”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(66,28): error C3646: “TermRequest”: 未知重写说明符
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(66,39): error C2059: 语法错误:“(”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(66,68): error C2238: 意外的标记位于“;”之前
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(87,134): error C2061: 语法错误: 标识符“ETextCommit”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(93,30): error C2061: 语法错误: 标识符“EDialogResult”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(118,16): error C2143: 语法错误: 缺少“;”(在“*”的前面)
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(118,10): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Classes.h(118,31): error C2238: 意外的标记位于“;”之前
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(23,62): error C3646: “InReason”: 未知重写说明符
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(23,3): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(24,62): error C3646: “ReturnValue”: 未知重写说明符
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(24,3): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(94,62): error C2079: “CG::UGuildData_C_OnSameMenuBookmarkAccessNew_Params::InBookMarkType”使用未定义的 class“CG::FString”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(161,62): error C2079: “CG::UGuildData_C_OnCmplInviteArraignment_Params::InEntryId”使用未定义的 class“CG::FString”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(176,62): error C2079: “CG::UGuildData_C_BndEvt__GuildEntriesList_K2Node_ComponentBoundEvent_2_OnClickedGuildEntry__DelegateSignature_Params::GuildEntryData”使用未定义的 struct“CG::FGuildEntryData”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(185,62): error C2079: “CG::UGuildData_C_BndEvt__TB_SearchBox_K2Node_ComponentBoundEvent_9_OnEditableTextBoxCommittedEvent__DelegateSignature_Params::Text”使用未定义的 class“CG::FText”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(186,62): error C3646: “CommitMethod”: 未知重写说明符
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(186,3): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(197,62): error C2079: “CG::UGuildData_C_OnGuiluildDatailGeted_Params::InGuildData”使用未定义的 struct“CG::FGuildData”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(233,62): error C3646: “Result”: 未知重写说明符
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(233,3): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(269,62): error C2079: “CG::UGuildData_C_BndEvt__GuildData_SearchBox_K2Node_ComponentBoundEvent_11_OnTextChange__DelegateSignature_Params::newText”使用未定义的 class“CG::FText”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(368,62): error C2079: “CG::UGuildData_C_SetNowTutorialHelpId__DelegateSignature_Params::TutorialHelpId”使用未定义的 class“CG::FName”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildData_Params.h(383,62): error C2079: “CG::UGuildData_C_OnSelectEntry__DelegateSignature_Params::GuildEntry”使用未定义的 struct“CG::FGuildEntryData”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildActivity_Classes.h(21,34): error C2504: “UUserWidget”: 未定义基类
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildActivity_Classes.h(24,62): error C2079: “CG::UGuildActivity_C::UberGraphFrame”使用未定义的 struct“CG::FPointerToUberGraphFrame”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildActivity_Classes.h(37,16): error C2143: 语法错误: 缺少“;”(在“*”的前面)
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildActivity_Classes.h(37,10): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildActivity_Classes.h(37,31): error C2238: 意外的标记位于“;”之前
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\GuildActivity_Params.h(64,62): error C2079: “CG::UGuildActivity_C_OnCompleteProfileLoaded_Params::PlayerProfileDetailMenuData”使用未定义的 struct“CG::FPlayerProfileMenuDetailData”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\Engine_Classes.h(2896,28): error C2065: “RowMap”: 未声明的标识符
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\Engine_Classes.h(2896,28): error C3861: “RowMap”: 找不到标识符
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\Engine_Classes.h(2898,55): error C3861: “RowMap”: 找不到标识符
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\Engine_Classes.h(2898,55): error C2065: “RowMap”: 未声明的标识符
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\SkyBlue_Classes.h(25462,59): error C2504: “FSBModelessDialog_USBOpenModelessDirectoryDialog”: 未定义基类
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\FilterButton_Classes.h(37,8): warning C4003: 类函数宏的调用“CreateWindowW”参数不足
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\FilterButton_Classes.h(37,8): error C2059: 语法错误:“常数”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\Fishing_Cast_Classes.h(60,8): error C2365: “CG::UFishing_Cast_C::HookSuccess”: 重定义；以前的定义是“数据成员”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\DeleteDialogLast_Classes.h(45,38): error C2059: 语法错误:“常数”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\DeleteDialogLast_Classes.h(45,8): error C2059: 语法错误:“)”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\DeleteDialogLast_Classes.h(45,44): error C2059: 语法错误:“)”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\DeleteDialogLast_Params.h(92,62): error C2059: 语法错误:“常数”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\DeleteDialogLast_Params.h(92,68): error C2238: 意外的标记位于“;”之前
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\BP_PlayerLevelStartSequenceTaskLoginBonus_Classes.h(33,8): error C2365: “CG::UBP_PlayerLevelStartSequenceTaskLoginBonus_C::LockLoadingScreen”: 重定义；以前的定义是“数据成员”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\BP_PhotoModeStampControlData_Classes.h(44,8): error C2059: 语法错误:“常数”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\BP_PhotoModeStampControlData_Classes.h(44,16): error C2238: 意外的标记位于“;”之前
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\DeleteDialogFirst_Classes.h(40,38): error C2059: 语法错误:“常数”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\DeleteDialogFirst_Classes.h(40,8): error C2059: 语法错误:“)”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\DeleteDialogFirst_Classes.h(40,44): error C2059: 语法错误:“)”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\DeleteDialogFirst_Params.h(74,62): error C2059: 语法错误:“常数”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\DeleteDialogFirst_Params.h(74,68): error C2238: 意外的标记位于“;”之前
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\MapWidget_Map_Classes.h(122,8): warning C4003: 类函数宏的调用“CreateDialogW”参数不足
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\MapWidget_Map_Classes.h(122,8): error C2059: 语法错误:“,”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\WBP_CharaSelect_Classes.h(196,35): error C2059: 语法错误:“常数”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\WBP_CharaSelect_Classes.h(196,8): error C2059: 语法错误:“)”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\WBP_CharaSelect_Classes.h(196,41): error C2059: 语法错误:“)”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\WBP_CharaSelect_Classes.h(198,36): error C2059: 语法错误:“常数”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\WBP_CharaSelect_Classes.h(198,8): error C2059: 语法错误:“)”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\WBP_CharaSelect_Classes.h(198,42): error C2059: 语法错误:“)”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\WBP_CharaSelect_Params.h(105,62): error C2059: 语法错误:“常数”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\WBP_CharaSelect_Params.h(105,68): error C2238: 意外的标记位于“;”之前
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\WBP_CharaSelect_Params.h(120,62): error C2059: 语法错误:“常数”
+F:\BlueProtocolInternal-master\CheatGear\Result\BLUEPROTOCOL-Win64-Shipping\1.6.0\Cpp\BLUEPROTOCOL-Win64-Shipping\SDK\WBP_CharaSelect_Params.h(120,68): error C2238: 意外的标记位于“;”之前
