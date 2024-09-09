@@ -1,4 +1,4 @@
-# 游戏关服 ，特此分享 BLUEPROTOCOL  SDK & dll
+# 祝贺 游戏关服 ，特此分享 BLUEPROTOCOL  SDK & dll 
 
 - 游戏具有 Wellbia小老头- XIGNCODE3 反作弊保护 - UE4+4.27.2版本引擎
 
