@@ -1,11 +1,17 @@
-# BLUE_PROTOCOL_SDK
-- 游戏具有 Wellbia小老头-XIGNCODE3-ucldr 反作弊保护 - UE4+4.27.2版本引擎
+# 游戏关服 ，特此分享 BLUE_PROTOCOL  SDK & dll
+
+- 游戏具有 Wellbia小老头- XIGNCODE3 反作弊保护 - UE4+4.27.2版本引擎
 
 - 游戏使用FProperty系统
 
-- FChunkedFixedUObjectArray GObjects at offset 0x769cb40
-- FNamePool GNames at offset 0x7660800
-- AppendString at Offset 0x26DCF90
+- NamePool = 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? 01 0F 10 03 4C 8D 44 24 20 48 8B C8
+
+- ObjectArray  = 48 8B 05 ? ? ? ? 48 8B 0C C8 48 8D 04 D1 EB 03  /  48 8B 1D ? ? ? ? 48 85 DB 74 3B 41 B0 01 33 D2 48 8B CB E8
+
+- BLUEPROTOCOL-Win64-Shipping.exe+7A848D0
+
+- BLUEPROTOCOL-Win64-Shipping.exe+5C843D0
+
 
  ```console
 Off::UStruct::Children: 0x48
