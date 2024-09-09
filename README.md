@@ -1,11 +1,53 @@
-# BLUE_PROTOCOL_SDK
-- 游戏具有 Wellbia小老头-XIGNCODE3-ucldr 反作弊保护 - UE4+4.27.2版本引擎
+# BLUEPROTOCOL  SDK & DLL  v1.07.000.824446
 
-- 游戏使用FProperty系统
+# 祝贺 游戏关服 ，特此分享 
 
-- FChunkedFixedUObjectArray GObjects at offset 0x769cb40
-- FNamePool GNames at offset 0x7660800
-- AppendString at Offset 0x26DCF90
+- 游戏具有 Wellbia小老头- XIGNCODE3 反作弊保护
+
+- UE4引擎 4.27.2版本
+
+
+# 香蕉协议 - **BananaProtocol**   DLL 内部作弊 功能信息 
+
+- 透视 （怪物 人物 NPC Actor）
+- 自瞄 （不太好用）
+- 吸怪 （可调整范围半径 0-10000米）
+- 全图 吸采集&吸宝箱
+- 攻击 伤害加倍 1-100倍 （单刷 上级 EX 上级改 如果通关速度过快 容易被人工封号 ）
+- 无限 技能 无CD
+- 无限 体力
+- 无敌 （可能有小bug）
+- 锁定 玩家位置
+- 飞天
+- 遁地
+- 人物 加速
+- 世界 加速
+
+# 香蕉头 外部作弊 功能信息
+
+- 无限 体力
+- 玩家 锁血
+- 锁定 玩家位置
+- 飞天
+- 遁地
+- 快速传送功能
+- 自定义传送功能
+- 传送坐标保存功能 
+
+
+
+
+
+
+# 部分基址偏移特征码
+
+- NamePool = 48 8D 0D ? ? ? ? E8 ? ? ? ? C6 05 ? ? ? ? 01 0F 10 03 4C 8D 44 24 20 48 8B C8
+
+- ObjectArray  = 48 8B 05 ? ? ? ? 48 8B 0C C8 48 8D 04 D1 EB 03  /  48 8B 1D ? ? ? ? 48 85 DB 74 3B 41 B0 01 33 D2 48 8B CB E8
+
+- GWorld = BLUEPROTOCOL-Win64-Shipping.exe + 0x07A848D0
+
+- GObject = BLUEPROTOCOL-Win64-Shipping.exe + 0x05C843D0
 
  ```console
 Off::UStruct::Children: 0x48
@@ -39,8 +81,6 @@ Off::InSDK::UDataTable::RowMap: 0x30
 
 PE-Offset: 0x28D0800
 PE-Index: 0x44
-
-GWorld-Offset: 0x77DEAA0
 
 Off::InSDK::Text::TextSize: 0x18
 Off::InSDK::Text::TextDatOffset: 0x0
