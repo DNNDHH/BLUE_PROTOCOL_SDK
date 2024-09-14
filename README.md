@@ -1,7 +1,7 @@
 
 # BLUEPROTOCOL  SDK & DLL  v1.07.000.824446
 
-# 祝贺 游戏关服 万代NMSL ，特此分享 
+# 祝贺 游戏关服 万代NMSL 运营三个智障！ 
 
 - 游戏具有 Wellbia小老头- XIGNCODE3 反作弊保护
 - UE4引擎 4.27.2版本
