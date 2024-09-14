@@ -4,6 +4,7 @@
 # 祝贺 游戏关服 万代NMSL 运营三个智障！ 
 
 - 游戏具有 Wellbia小老头- XIGNCODE3 反作弊保护
+- 请自行提权注入..这里不提供内核注入方法
 - UE4引擎 4.27.2版本
 
 ![390ee9d8c1a6495bb236a8b36146c64a560164e19b9240f2a3d450cc62fffe38](https://github.com/user-attachments/assets/73c55941-af3c-4b9e-98aa-6afbc6f2243f)
