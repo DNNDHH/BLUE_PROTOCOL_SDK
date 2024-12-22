@@ -1,5 +1,5 @@
 
-# BLUEPROTOCOL  SDK & DLL  v1.07.000.824446
+# BLUEPROTOCOL  SDK & DLL  v1.08.000.837664 
 
 # 祝贺 游戏关服 万代NMSL 运营三个智障！ 
 
@@ -36,7 +36,11 @@
 - 传送坐标保存功能 
 
 
+# 游戏资源解包 AES密钥
 
+ ```console
+0xEA9051DDACE1CCF98A0510F0E370BD986A75C74756E0309E6A578A47AF564255
+  ```
 
 
 
@@ -46,9 +50,9 @@
 
 - ObjectArray  = 48 8B 05 ? ? ? ? 48 8B 0C C8 48 8D 04 D1 EB 03  /  48 8B 1D ? ? ? ? 48 85 DB 74 3B 41 B0 01 33 D2 48 8B CB E8
 
-- GWorld = BLUEPROTOCOL-Win64-Shipping.exe + 0x07A848D0
+- GWorld = BLUEPROTOCOL-Win64-Shipping.exe + 0x07B276D0
 
-- GName = BLUEPROTOCOL-Win64-Shipping.exe + 0x05C843D0
+- GName = BLUEPROTOCOL-Win64-Shipping.exe + 0x05CF32F8
 
  ```console
 Off::UStruct::Children: 0x48
